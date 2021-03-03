@@ -22,7 +22,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-// catch 404 and forward to error handler
+//Agregue
+var service = require('./routes/service');
+
+//Agregue la siguiente linea de codigo
+app.use('/service', service);
+
 app.use(function(req, res, next) {
   next(createError(404));
 });
@@ -36,6 +41,11 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+const port = 8000;
+app.listen(port, () =>{
+  console.log("Corriendo en el puerto " + port)
 });
 
 module.exports = app;
